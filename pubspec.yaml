@@ -1,0 +1,12 @@
+name: zam_test
+version: 0.0.1
+description: A typed wrapper around the test package  several utilities for testing.
+homepage: https://zamstation.com
+repository: https://github.com/zamstation/zam_core
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  test: ^1.17.4
+  zam_core: ^0.0.2
