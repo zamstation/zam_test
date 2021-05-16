@@ -93,7 +93,8 @@ class Height {
   final double value;
   double get valueInMetre => value / 100;
 
-  Height(double value) : value = value > 0 ? value : throw HeightNotValidException(value);
+  Height(double value)
+      : value = value > 0 ? value : throw HeightNotValidException(value);
 
   @override
   String toString() {

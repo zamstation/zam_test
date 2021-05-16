@@ -5,7 +5,8 @@ import '_setup.dart';
 
 void main() {
   group('shutdown: ', () {
-    test('When debug is set to false, It should not print anything', overridePrint(() async {
+    test('When debug is set to false, It should not print anything',
+        overridePrint(() async {
       await shutdown(debug: false);
       expect(printLog.length, 0);
     }));

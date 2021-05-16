@@ -19,7 +19,8 @@ import 'test_case.dart';
 ///       ).execute();
 ///     }
 ///
-class NegativeTestCase<INPUT extends Object?, OUTPUT extends Object?> extends TestCase<INPUT, OUTPUT> {
+class NegativeTestCase<INPUT extends Object?, OUTPUT extends Object?>
+    extends TestCase<INPUT, OUTPUT> {
   ///
   /// Exception Type can be provided instead of a custom matcher.
   /// Uses [ParameterizedTypeMatcher] instead of [TypeMatcher]/[isA].
