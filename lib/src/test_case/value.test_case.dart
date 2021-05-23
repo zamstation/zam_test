@@ -19,7 +19,8 @@ import 'test_case.dart';
 ///       ).execute();
 ///     }
 ///
-class ValueTestCase<INPUT extends Object?, OUTPUT extends Object?> extends TestCase<INPUT, OUTPUT> {
+class ValueTestCase<INPUT extends Object?, OUTPUT extends Object?>
+    extends TestCase<INPUT, OUTPUT> {
   ///
   /// A simple output value can be provided instead of a custom matcher.
   /// Generated matcher will be 'equals(output)'

@@ -74,7 +74,9 @@ abstract class TestGroup<INPUT extends Object?, OUTPUT extends Object?> {
     setUpAll(setUp);
 
     group(description, () {
-      testCases.map((testCase) => testCase.copyWith(run)).forEach((testCase) => testCase.execute());
+      testCases
+          .map((testCase) => testCase.copyWith(run))
+          .forEach((testCase) => testCase.execute());
     });
 
     tearDownAll(tearDown);
