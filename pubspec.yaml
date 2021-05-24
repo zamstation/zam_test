@@ -9,4 +9,4 @@ environment:
 
 dependencies:
   test: ^1.17.4
-  zam_core: ^0.0.2
+  zam_core: ^0.1.1

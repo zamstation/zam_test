@@ -43,7 +43,7 @@ class NegativeTestCase<INPUT extends Object?, OUTPUT extends Object?>
     required String when,
     required INPUT input,
     required this.exception,
-    ParameterizedCallback<OUTPUT, INPUT>? action,
+    ParameterizedCallback<INPUT, OUTPUT>? action,
     String? testOn,
     Timeout? timeout,
     dynamic skip,
@@ -69,7 +69,7 @@ class NegativeTestCase<INPUT extends Object?, OUTPUT extends Object?>
   ///
   @override
   NegativeTestCase<INPUT, OUTPUT> copyWith(
-    ParameterizedCallback<OUTPUT, INPUT> action,
+    ParameterizedCallback<INPUT, OUTPUT> action,
   ) =>
       NegativeTestCase<INPUT, OUTPUT>(
         when: this.when,
