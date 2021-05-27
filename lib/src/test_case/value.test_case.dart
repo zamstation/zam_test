@@ -42,7 +42,7 @@ class ValueTestCase<INPUT extends Object?, OUTPUT extends Object?>
     required String then,
     required INPUT input,
     required this.output,
-    ParameterizedCallback<OUTPUT, INPUT>? action,
+    ParameterizedCallback<INPUT, OUTPUT>? action,
     String? testOn,
     Timeout? timeout,
     dynamic skip,

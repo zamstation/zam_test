@@ -67,7 +67,7 @@ class TestCase<INPUT extends Object?, OUTPUT extends Object?> {
   /// Provided only if the [TestCase] is executed without a [TestGroup].
   /// If [TestGroup] is provided, the common [action] is run by just varying the input.
   ///
-  final ParameterizedCallback<OUTPUT?, INPUT> action;
+  final ParameterizedCallback<INPUT, OUTPUT?> action;
 
   ///
   /// Direct forward to [test] function
@@ -108,7 +108,7 @@ class TestCase<INPUT extends Object?, OUTPUT extends Object?> {
     required this.then,
     required this.input,
     required this.matcher,
-    ParameterizedCallback<OUTPUT, INPUT>? action,
+    ParameterizedCallback<INPUT, OUTPUT>? action,
     this.testOn,
     this.timeout,
     this.skip,
@@ -121,7 +121,7 @@ class TestCase<INPUT extends Object?, OUTPUT extends Object?> {
   /// [copyWith] is used internally by the [TestGroup].
   ///
   TestCase<INPUT, OUTPUT> copyWith(
-    ParameterizedCallback<OUTPUT, INPUT> action,
+    ParameterizedCallback<INPUT, OUTPUT> action,
   ) {
     return TestCase<INPUT, OUTPUT>(
       when: this.when,
