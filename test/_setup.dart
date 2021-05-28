@@ -18,34 +18,6 @@ class HeightTest extends TestGroup<double, String> {
       input: -23,
       exception: HeightNotValidException,
     ),
-    NegativeTestCase(
-      when: 'Negative Border height value',
-      input: -1,
-      exception: HeightNotValidException,
-    ),
-    NegativeTestCase(
-      when: 'Zero height value',
-      input: 0,
-      exception: HeightNotValidException,
-    ),
-    ValueTestCase(
-      when: 'Positive Border height value',
-      then: 'outputs value in m',
-      input: 1,
-      output: '0.01 m',
-    ),
-    ValueTestCase(
-      when: 'Positive height value',
-      then: 'outputs value in m',
-      input: 45,
-      output: '0.45 m',
-    ),
-    ValueTestCase(
-      when: 'Positive Extreme height value',
-      then: 'outputs value in m',
-      input: 834,
-      output: '8.34 m',
-    ),
   ];
 }
 
