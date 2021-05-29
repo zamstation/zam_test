@@ -93,7 +93,7 @@ class NegativeTestCase<INPUT extends Object?, OUTPUT extends Object?>
     test(
       description,
       () => expect(
-        () => action(input),
+        () => action?.call(input),
         matcher,
       ),
     );
