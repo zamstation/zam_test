@@ -10,22 +10,15 @@ void main() {
       then: 'outputs value in m',
       input: 1.0,
       matcher: equals('0.01 m'),
+      action: (double input) => Height(input).toStringInMetre(),
     );
 
     test(
-        'When action is not provided to the TestCase, It should be defaulted to null returning dummy function.',
-        () {
-      expect(testCase.action(1), null);
-    });
-
-    final newTestCase =
-        testCase.copyWith((double input) => Height(input).toStringInMetre());
-    test(
         'When copied with a new action, all other fields should remain the same.',
         () {
-      expect(newTestCase.when, 'Positive Border height value');
-      expect(newTestCase.then, 'outputs value in m');
-      expect(newTestCase.input, 1);
+      expect(testCase.when, 'Positive Border height value');
+      expect(testCase.then, 'outputs value in m');
+      expect(testCase.input, 1);
     });
 
     test('Description should be built using when and then.', () {
