@@ -5,15 +5,15 @@ import '_setup.dart';
 
 void main() {
   group('TestRun: ', () {
-    final testRun = TestRun('All Tests', [
+    final testGroup = TestGroup('All Tests', [
       HeightTest(),
     ]);
     test('Object is created successfully.', () {
-      expect(testRun.testGroups.length, 1);
+      expect(testGroup.tests.length, 1);
     });
 
     // You cannot run a test inside a test. Hence the hack.
-    testRun.execute();
+    testGroup.execute();
     test('Execute method should return normally.', () {
       expect(() => null, returnsNormally);
     });

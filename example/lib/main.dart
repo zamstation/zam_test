@@ -1,34 +1,38 @@
 import 'package:zam_test/utilities.dart';
 import 'package:zam_test/zam_test.dart';
 
-/// [TestRun] is used to run multiple [TestGroup] together.
+///
+/// [TestGroup] is used to run multiple [Test] together.
+///
 void main() {
-  TestRun('All Tests', [
+  TestGroup('BMI', [
     HeightTest(),
     // ...
     // ...
-    // ... (you can add more test groups here)
+    // ... (you can add more tests here)
   ]).execute();
 
   // Alternatively, you can write as follows.
   // HeightTest().execute();
-  // But [TestRun] will help you when you have many [TestGroup]s.
+  // But [TestGroup] will help you when you have many [Test]s.
 }
 
-/// Create a class extending [TestGroup].
-/// Provide a [name].
+///
+/// Create a class extending [Test].
+/// Provide a [name]. (If not, defaults to class name. In this case, it is 'HeightTest')
 /// You can optionally override the [nameSuffix] and the [description].
-/// Override [setUp] and [tearDown] when required.
+/// Override [initialize] and [dispose] when required.
 /// Override [run] which is a function called for every [TestCase].
 /// Provide a list of [testCases].
-class HeightTest extends TestGroup<double, String> {
+///
+class HeightTest extends Test<double, String> {
   @override
   final name = 'Height';
 
   /// Runs once before the first [TestCase] is run.
   /// [sleep] is an utility function in this package.
   @override
-  setUp() async {
+  initialize() async {
     await sleep(seconds: 1);
   }
 
@@ -41,7 +45,7 @@ class HeightTest extends TestGroup<double, String> {
   /// Runs once after the last [TestCase] is run.
   /// [shutdown] is an utility function in this package.
   @override
-  tearDown() async {
+  dispose() async {
     await shutdown(seconds: 1);
   }
 
@@ -52,7 +56,7 @@ class HeightTest extends TestGroup<double, String> {
   ///   [ValueTestCase] - Expects an input and an output.
   ///   [NegativeTestCase] - Expects an input and an exception type.
   @override
-  final testCases = [
+  final cases = [
     NegativeTestCase(
       when: 'Negative height value',
       input: -23,

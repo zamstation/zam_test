@@ -2,7 +2,7 @@ import 'package:zam_core/zam_core.dart' show ParameterizedCallback;
 import 'package:test/test.dart';
 
 ///
-/// TestCase can be seen as the typed version of [test] function from the test package.
+/// One of the cases in Test.
 ///
 /// Example:
 ///
@@ -101,7 +101,7 @@ class TestCase<INPUT extends Object?, OUTPUT extends Object?> {
 
   ///
   /// [action] is optional.
-  /// Do not provide [action] if the [TestCase] is executed in a [TestGroup].
+  /// Do not provide [action], if the [TestCase] is executed in a [TestGroup].
   ///
   TestCase({
     required this.when,

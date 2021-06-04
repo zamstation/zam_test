@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:test/test.dart';
 import 'package:zam_test/zam_test.dart';
 
-class HeightTest extends TestGroup<double, String> {
+class HeightTest extends Test<double, String> {
   @override
   final name = 'Height';
 
@@ -12,11 +13,23 @@ class HeightTest extends TestGroup<double, String> {
   }
 
   @override
-  final testCases = [
+  final cases = [
     NegativeTestCase(
       when: 'Negative height value',
       input: -23,
       exception: HeightNotValidException,
+    ),
+    ValueTestCase(
+      when: 'Positive Border height value',
+      then: 'outputs value in m',
+      input: 1,
+      output: '0.01 m',
+    ),
+    TestCase(
+      when: 'Positive height value',
+      then: 'outputs value in m',
+      input: 45,
+      matcher: equals('0.45 m'),
     ),
   ];
 }
