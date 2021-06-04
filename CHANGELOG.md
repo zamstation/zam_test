@@ -1,3 +1,10 @@
+# 0.1.0
+  * Added new classes `Test`, `SingleCasedTest` and `MultiCasedTest`. Use `Test` as the main class instead of `TestCase` and `TestGroup`.
+  * Removed `TestRun`. Use `TestGroup` instead.
+  * Modified `TestCase` to make its action field optional.
+  * Updated Tests.
+  * Updated Documentation and Readme.
+
 # 0.0.2
 
   * Updated dependency: zam_core 0.1.1
