@@ -1,84 +1,93 @@
 import 'package:test/test.dart';
+import 'package:zam_core/zam_core.dart';
 
-import '../test_case/test_case.dart';
+import '../test/test.dart';
 
 ///
 /// [TestGroup] is synonymous to [group] function.
-/// You can wrap multiple [TestCase]s in a [TestGroup].
-/// Create a new class extending [TestGroup],
-/// provide a [name] and a list of [testCases] and you're good to go.
+/// You can wrap multiple [Test]s in a [TestGroup].
 ///
 /// Example:
 ///
-///     class HeightTest extends TestGroup<double, String> {
-///       @override
-///       final name = 'Height';
+///     TestGroup('BMI', [
+///       HeightTest(),
+///     ]).execute();
 ///
-///       @override
-///       run(input) {
-///         return Height(input).toStringInMetre();
-///       }
-///
-///       @override
-///       final testCases = [
-///         NegativeTestCase(
-///           when: 'Negative Border height value',
-///           input: -1,
-///           exception: HeightNotValidException,
-///         ),
-///         NegativeTestCase(
-///           when: 'Zero height value',
-///           input: 0,
-///           exception: HeightNotValidException,
-///         ),
-///         ValueTestCase(
-///           when: 'Positive Border height value',
-///           then: 'outputs value in m',
-///           input: 1,
-///           output: '0.01 m',
-///         ),
-///       ];
-///     }
-///
-abstract class TestGroup<INPUT extends Object?, OUTPUT extends Object?> {
-  String get name;
+class TestGroup implements Initializable<dynamic>, Disposable<dynamic> {
+  ///
+  /// Used in building description.
+  ///
+  final String name;
 
   ///
-  /// [nameSuffix] is defaulted to this class.
-  /// Override this field to provide your own suffix.
+  /// Used in building description.
   ///
-  final String nameSuffix = ':';
+  final String nameSuffix;
 
   ///
-  /// Override this field if you're not happy with the built string.
+  /// Built from name and nameSuffix.
   ///
-  String get description => name + nameSuffix;
-  Iterable<TestCase<INPUT, OUTPUT>> get testCases;
+  String get description => name == '' ? '' : '$name$nameSuffix';
 
   ///
-  /// Runs once before the first [TestCase] is run.
+  /// List of tests to be run with in this group.
   ///
-  dynamic setUp() {}
+  final List<Test> tests;
+
+  const TestGroup(
+    this.name,
+    this.tests, {
+    this.nameSuffix = ' -',
+  });
 
   ///
-  /// Runs for every [TestCase].
+  /// Call this constructor when you extend [TestGroup].
   ///
-  OUTPUT run(INPUT input);
+  const TestGroup.empty()
+      : name = '',
+        nameSuffix = ' -',
+        tests = const [];
 
   ///
-  /// Runs once after the last [TestCase] is run.
+  /// Runs once for every [TestGroup].
   ///
-  dynamic tearDown() {}
+  @override
+  dynamic initialize() {}
+
+  ///
+  /// Runs once for every [TestGroup].
+  ///
+  @override
+  dynamic dispose() {}
+
+  ///
+  /// Runs for every [Test].
+  ///
+  dynamic initializeForEveryTest() {}
+
+  ///
+  /// Runs for every [Test].
+  ///
+  dynamic disposeForEveryTest() {}
 
   void execute() {
-    setUpAll(setUp);
-
     group(description, () {
-      testCases
-          .map((testCase) => testCase.copyWith(run))
-          .forEach((testCase) => testCase.execute());
-    });
+      setUpAll(initialize);
 
-    tearDownAll(tearDown);
+      tests
+          .map((test) => test.copyWith(
+                initialize: () {
+                  initializeForEveryTest();
+                  return test.initialize();
+                },
+                dispose: () {
+                  disposeForEveryTest();
+                  return test.dispose();
+                },
+              ))
+          .forEach((test) => test.execute());
+
+      tearDownAll(dispose);
+    });
   }
 }

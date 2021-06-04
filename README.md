@@ -2,12 +2,9 @@
 
 **zam_test** is a typed version of the [test](https://pub.dev/packages/test) package.  
   
-
 [![Version](https://img.shields.io/pub/v/zam_test?color=%234287f5)](https://pub.dev/packages/zam_test)
 [![Build](https://github.com/zamstation/zam_test/actions/workflows/build.yml/badge.svg)](https://github.com/zamstation/zam_test/actions/workflows/build.yml)
-[![Style](https://img.shields.io/badge/style-effective__dart-%2300b16a)](https://dart.dev/guides/language/effective-dart/style)
 [![Stars](https://img.shields.io/github/stars/zamstation/zam_test.svg?style=flat&logo=github&colorB=deeppink&label=stars)](https://github.com/zamstation/zam_test/stargazers)
-[![CodeFactor](https://www.codefactor.io/repository/github/zamstation/zam_test/badge)](https://www.codefactor.io/repository/github/zamstation/zam_test)
 [![License](https://img.shields.io/github/license/zamstation/zam_test)](https://github.com/zamstation/zam_test/blob/master/LICENSE)
 
 ## What's inside the package
@@ -15,16 +12,90 @@
 Includes the following core components.
 
   * [TestCase](https://pub.dev/documentation/zam_test/latest/zam_test/TestCase-class.html)
+  * [Test](https://pub.dev/documentation/zam_test/latest/zam_test/Test-class.html)
   * [TestGroup](https://pub.dev/documentation/zam_test/latest/zam_test/TestGroup-class.html)
-  * [TestRun](https://pub.dev/documentation/zam_test/latest/zam_test/TestRun-class.html)
 
 Check out all the components in detail [here](https://pub.dev/documentation/zam_test/latest/zam_test/zam_test-library.html)
 
 ## How to use
 
+### Summary
+- `Test` is the main class. It has two constructor methods, the `Test.single` and the `Test.multi`. If your test is simple and has only one case, then use `Test.single`.
+- `TestCase` is something that is wrapped inside a `Test.multiple`. Avoid using a `TestCase` directly.
+- `TestGroup` is used to run multiple `Test` together.
+
+### Test
+
+`Test` can be seen as the typed version of `test()` function in the original [test](https://pub.dev/packages/test) package. Mostly a `Test` will have multiple cases based on different inputs. For example, a login test has multiple test cases based on different inputs like wrong username, wrong password, correct username and password, etc. A `Test` can also have a single test case. Therefore, we have `MultiCasedTest` and `SingleCasedTest` respectively to address these. 
+
+You can also create a new test by extending `Test` by following the steps given below.
+
+  * Create a class extending `Test`.
+  * Provide a `name`.
+  * Override `run` function which is called for every `TestCase`.
+  * Provide a list of `cases`.
+  * Override `intialize` and `dispose` when required.
+  * You can customize the `nameSuffix` and the `description` too.
+
+```dart
+class HeightTest extends Test<double, String> {
+  @override
+  final name = 'Height';
+
+  @override
+  run(input) {
+    return Height(input).toStringInMetre();
+  }
+
+  @override
+  final cases = [
+    NegativeTestCase(
+      when: 'Negative height value',
+      input: -23,
+      exception: HeightNotValidException,
+    ),
+    NegativeTestCase(
+      when: 'Zero height value',
+      input: 0,
+      exception: HeightNotValidException,
+    ),
+    ValueTestCase(
+      when: 'Positive Border height value',
+      then: 'outputs value in m',
+      input: 1,
+      output: '0.01 m',
+    ),
+  ];
+}
+
+void main() {
+  HeightTest().execute();
+}
+```
+
+### TestGroup
+
+`TestGroup` is used to run multiple `Test` together. It is more of a utility class. You can run tests without this.
+
+```dart
+void main() {
+  TestGroup('BMI', [
+    HeightTest(),
+    // WeightTest(),
+    // HeightTest(),
+    // BmiCategoryTest(),
+    // ...
+    // ...
+    // ... (you can add more test groups here)
+  ]).execute();
+}
+```
+
 ### TestCase
 
-`TestCase` can be seen as the typed version of `test()` function in the original [test](https://pub.dev/packages/test) package. It accepts two descriptive texts `when` and `then`, an `input`, a `matcher` and an optional callback called the `action`.
+It accepts two descriptive texts `when` and `then`, an `input`, a `matcher` and an optional callback called the `action`.
+
+**CONSIDER**: Always consider executing it inside a `Test` class even when you want to run a single test case which is accomplished using `Test.single` constructor.
 
 Simple way to execute a `TestCase` is as follows.
 
@@ -45,69 +116,7 @@ Currently we have provided two basic test case types which derive from `TestCase
   * [ValueTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/ValueTestCase-class.html) - To match direct values.
   * [NegativeTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/NegativeTestCase-class.html) - To match exceptions.
 
-### TestGroup
-
-`TestGroup` is synonymous to `group()` function. You can wrap multiple test cases in a `TestGroup`. You can create a new test group class by extending `TestGroup` by following the steps given below.
-
-  * Create a class extending `TestGroup`.
-  * Provide a `name`.
-  * Override `run` which is a function called for every `TestCase`.
-  * Provide a list of `testCases`.
-  * Override `setUp` and `tearDown` when required.
-  * You can optionally override the `nameSuffix` and the `description`.
-
-```dart
-void main() {
-  HeightTest().execute();
-}
-
-class HeightTest extends TestGroup<double, String> {
-  @override
-  final name = 'Height';
-
-  @override
-  run(input) {
-    return Height(input).toStringInMetre();
-  }
-
-  @override
-  final testCases = [
-    NegativeTestCase(
-      when: 'Negative Border height value',
-      input: -1,
-      exception: HeightNotValidException,
-    ),
-    NegativeTestCase(
-      when: 'Zero height value',
-      input: 0,
-      exception: HeightNotValidException,
-    ),
-    ValueTestCase(
-      when: 'Positive Border height value',
-      then: 'outputs value in m',
-      input: 1,
-      output: '0.01 m',
-    ),
-  ];
-}
-```
-
-### TestRun
-
-`TestRun` is used to run multiple `TestGroup` together. It is more of a utility class. You can run test groups without this.
-
-```dart
-void main() {
-  TestRun('All Tests', [
-    HeightTest(),
-    // WeightTest(),
-    // BmiTest(),
-    // ...
-    // ...
-    // ... (you can add more test groups here)
-  ]).execute();
-}
-```
+### Read More
 
 To learn more, check out this dedicated [example](https://github.com/zamstation/zam_test/blob/master/example/lib/main.dart) in github.
 
@@ -115,10 +124,12 @@ To learn more, check out this dedicated [example](https://github.com/zamstation/
 
 You can override the following at the moment.
 
-  * TestCase -> descriptionDelimiter - Defaults to `' -> '`.
-  * TestCase -> description - It is generated by combining the `when` and `then` texts with a `descriptionDelimiter` in between.
-  * TestGroup -> nameSuffix - Defaults to `':'`.
-  * TestGroup -> description - It is generated by combining `name` and `nameSuffix`.
+  * `TestCase` -> `descriptionDelimiter` - Defaults to `' -> '`.
+  * `TestCase` -> description - It is generated by combining the `when` and `then` texts with a `descriptionDelimiter` in between.
+  * `Test` -> `nameSuffix` - Defaults to `':'`.
+  * `Test` -> `description` - It is generated by combining `name` and `nameSuffix`.
+  * `TestGroup` -> `nameSuffix` - Defaults to `' -'`.
+  * `TestGroup` -> `description` - It is generated by combining `name` and `nameSuffix`.
 
 ## Contributors
-  * Amsakanna
+  * [Amsakanna](https://github.com/amsakanna)
