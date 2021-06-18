@@ -1,8 +1,8 @@
 import 'package:zam_core/zam_core.dart' show ParameterizedCallback;
 import 'package:test/test.dart';
 
-import '../matchers/parameterized_type.matcher.dart';
-import 'test_case.dart';
+import '../../matchers/parameterized_type.matcher.dart';
+import '../test_case.dart';
 
 ///
 /// A [TestCase] class that can be used to match exceptions.

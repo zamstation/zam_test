@@ -7,6 +7,7 @@ import 'package:zam_test/zam_test.dart';
 void main() {
   TestGroup('BMI', [
     HeightTest(),
+    HeightCanCreateTest(),
     // ...
     // ...
     // ... (you can add more tests here)
@@ -55,6 +56,7 @@ class HeightTest extends Test<double, String> {
   ///   [TestCase] - Base class which expects an input and a matcher.
   ///   [ValueTestCase] - Expects an input and an output.
   ///   [NegativeTestCase] - Expects an input and an exception type.
+  ///   [BooleanTestCase] - Expects an input and output is set based on constructor.
   @override
   final cases = [
     NegativeTestCase(
@@ -93,9 +95,30 @@ class HeightTest extends Test<double, String> {
   ];
 }
 
+class HeightCanCreateTest extends Test<double, bool> {
+  @override
+  bool run(double input) {
+    return Height.canCreate(input);
+  }
+
+  @override
+  final cases = [
+    BooleanTestCase.truthy(
+      when: 'Positive height value',
+      input: 45,
+    ),
+    BooleanTestCase.falsy(
+      when: 'Negative height value',
+      input: -22,
+    ),
+  ];
+}
+
 class Height {
   final double value;
   double get valueInMetre => value / 100;
+
+  static bool canCreate(double value) => value > 0;
 
   Height(double value)
       : value = value > 0 ? value : throw HeightNotValidException(value);

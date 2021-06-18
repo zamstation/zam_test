@@ -38,6 +38,8 @@ class Height {
   final double value;
   double get valueInMetre => value / 100;
 
+  static bool canCreate(double value) => value > 0;
+
   Height(double value)
       : value = value > 0 ? value : throw HeightNotValidException(value);
 

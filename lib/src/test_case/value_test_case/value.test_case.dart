@@ -1,7 +1,7 @@
 import 'package:zam_core/zam_core.dart' show ParameterizedCallback;
 import 'package:test/test.dart';
 
-import 'test_case.dart';
+import '../test_case.dart';
 
 ///
 /// A [TestCase] class that can be used to compare flat output values.

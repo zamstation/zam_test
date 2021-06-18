@@ -115,6 +115,7 @@ Currently we have provided two basic test case types which derive from `TestCase
 
   * [ValueTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/ValueTestCase-class.html) - To match direct values.
   * [NegativeTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/NegativeTestCase-class.html) - To match exceptions.
+  * [BooleanTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/BooleanTestCase-class.html) - To match booleans.
 
 ### Read More
 
