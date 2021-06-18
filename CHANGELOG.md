@@ -1,3 +1,9 @@
+# 0.3.0
+- Modified `zam_test.dart` to export original test library.
+- Updated dependency: zam_core 0.5.0
+- Updated dependency: test 1.17.8
+- Updated dependency: dart sdk ">=2.13.0 <3.0.0"
+
 # 0.2.0
 - Added `BooleanTestCase`.
 
