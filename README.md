@@ -3,7 +3,7 @@
 **zam_test** is a typed version of the [test](https://pub.dev/packages/test) package.  
   
 [![Version](https://img.shields.io/pub/v/zam_test?color=%234287f5)](https://pub.dev/packages/zam_test)
-[![Build](https://github.com/zamstation/zam_test/actions/workflows/build.yml/badge.svg)](https://github.com/zamstation/zam_test/actions/workflows/build.yml)
+[![Build](https://github.com/zamstation/zam_test/actions/workflows/build.yaml/badge.svg)](https://github.com/zamstation/zam_test/actions/workflows/build.yaml)
 [![Stars](https://img.shields.io/github/stars/zamstation/zam_test.svg?style=flat&logo=github&colorB=deeppink&label=stars)](https://github.com/zamstation/zam_test/stargazers)
 [![License](https://img.shields.io/github/license/zamstation/zam_test)](https://github.com/zamstation/zam_test/blob/master/LICENSE)
 
