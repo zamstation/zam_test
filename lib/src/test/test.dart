@@ -131,5 +131,5 @@ abstract class Test<INPUT extends Object?, OUTPUT extends Object?>
   }
 
   @override
-  dispose() {}
+  dynamic dispose() {}
 }

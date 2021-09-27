@@ -1,4 +1,4 @@
-import 'package:zam_core/zam_core.dart' show ParameterizedCallback;
+import 'package:zam_core/zam_core.dart';
 import 'package:test/test.dart';
 
 import '../test_case.dart';

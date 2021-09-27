@@ -1,5 +1,5 @@
-import 'package:zam_core/zam_core.dart' show ParameterizedCallback;
 import 'package:test/test.dart';
+import 'package:zam_core/zam_core.dart';
 
 ///
 /// One of the cases in Test.
