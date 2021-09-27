@@ -1,17 +1,11 @@
 ---
-name: Infrastructure Repairs
-about: Report fixes that are related to deploy scripts or documentation.
-title: "Infrastructure Repairs and Documentation"
-labels: infrastructure repairs, documentation
+name: Infrastructure Issues
+about: Report issues that are related to infrastructure like deploy scripts.
+title: "Infra: "
+labels: infrastructure repairs
 assignees: amsakanna
 
 ---
-
-## Meta
-| Name | Description |
-| -----| ----------- |
-| Version | x.x.x |
-| Scope | ComponentName |
 
 ## Changes
 1. 

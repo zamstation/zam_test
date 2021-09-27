@@ -1,8 +1,10 @@
-name: Deploy Package
+name: Release
 
 on:
   push:
-    tags: ["**"]
+    tags-ignore: ["ignore"]
+  pull_request:
+    tags-ignore: ["ignore"]
 
 jobs:
   test:

@@ -7,21 +7,15 @@ assignees: amsakanna
 
 ---
 
-## Meta
-| Name | Description |
-| -----| ----------- |
-| Version | x.x.x |
-| Scope | ComponentName |
-
 ## Description
-A clear and concise description of what the feature is.
+A clear and concise description of the feature.
 
-### New Components
+## New Components
 1. Component 1
 2. Component 2
 3. Component 3
 
-### Affected Components
-1. Component 1
-2. Component 2
-3. Component 3
+## Changes
+1. 
+2. 
+3. 
