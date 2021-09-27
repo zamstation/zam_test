@@ -1,3 +1,6 @@
+# 0.4.0
+- Updated dependency: zam_core 0.6.0
+
 # 0.3.0
 - Modified `zam_test.dart` to export original test library.
 - Updated dependency: zam_core 0.5.0
