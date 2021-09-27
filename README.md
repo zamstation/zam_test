@@ -111,7 +111,7 @@ void main() {
 }
 ```
 
-Currently we have provided two basic test case types which derive from `TestCase`. We expect this list to grow in the future to handle various scenarios. Until then you can use `TestCase` since it accepts a custom matcher.
+Currently we have provided the following test case types which derive from `TestCase`. We expect this list to grow in the future to handle various scenarios. Until then you can use `TestCase` since it accepts a custom matcher.
 
   * [ValueTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/ValueTestCase-class.html) - To match direct values.
   * [NegativeTestCase](https://pub.dev/documentation/zam_test/latest/zam_test/NegativeTestCase-class.html) - To match exceptions.
