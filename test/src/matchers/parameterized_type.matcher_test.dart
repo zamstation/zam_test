@@ -1,6 +1,6 @@
 import 'package:zam_test/zam_test.dart';
 
-import '_setup.dart';
+import '../_setup.dart';
 
 void main() {
   final matcher = ParameterizedTypeMatcher(HeightNotValidException);
