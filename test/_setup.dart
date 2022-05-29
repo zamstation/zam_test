@@ -1,6 +1,5 @@
-import 'dart:async';
+import 'dart:async' show Zone, ZoneSpecification;
 
-import 'package:test/test.dart';
 import 'package:zam_test/zam_test.dart';
 
 class HeightTest extends Test<double, String> {
